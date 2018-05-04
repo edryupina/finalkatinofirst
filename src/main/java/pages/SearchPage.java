@@ -10,6 +10,10 @@ import steps.BaseSteps;
 
 public class SearchPage {
 
+    //поправила
+    @FindBy(xpath = "//a[text()='Перейти ко всем фильтрам']")
+    WebElement filters;
+
     @FindBy(name = "glf-pricefrom-var")
     WebElement priceFrom;
 
@@ -19,8 +23,12 @@ public class SearchPage {
     @FindBy(xpath = "//label[text()='LG']")
     WebElement lg;
 
-    @FindBy(xpath = "//button[@class='button button_action_n-filter-apply button_size_s button_pseudo_yes button_theme_pseudo i-bem button_js_inited']")
-    WebElement buttonApply;
+    // поправила и заменила по-другому
+   // @FindBy(xpath = "//*[contains(text(),'Показать подходящие')]/..")
+  //  WebElement buttonApply;
+
+    @FindBy(xpath = "//div[@class='layout layout_type_maya']//a/span[contains(text(), 'Показать подходящие')]/parent::a")
+     WebElement buttonApply;
 
     @FindBy(xpath = "//button/span[text()='Показывать по 12']")
     public WebElement showTwelve;
@@ -43,10 +51,10 @@ public class SearchPage {
 
     public void filterApply() {
         Wait<WebDriver> wait = new WebDriverWait(BaseSteps.getDriver(), 10, 1000);
+        wait.until(ExpectedConditions.visibilityOf(filters)).click();
         wait.until(ExpectedConditions.visibilityOf(priceFrom)).sendKeys("20000");
         wait.until(ExpectedConditions.visibilityOf(samsung)).click();
-        wait.until(ExpectedConditions.visibilityOf(lg)).click();
-    }
+        wait.until(ExpectedConditions.visibilityOf(lg)).click();}
 
     public void clickButtonApply() {
         Wait<WebDriver> wait = new WebDriverWait(BaseSteps.getDriver(), 10, 1000);
@@ -59,6 +67,13 @@ public class SearchPage {
     }
 
     public void searchFirstElement() {
+        Wait<WebDriver> wait = new WebDriverWait(BaseSteps.getDriver(), 10, 1000);
+        wait.until(ExpectedConditions.visibilityOf(firstElement)).getText();
+        headerSearch.sendKeys(firstElement.getText());
+        wait.until(ExpectedConditions.visibilityOf(buttonSearch)).click();
+    }
+
+    public void searchPasteSearchFirstElement() {
         Wait<WebDriver> wait = new WebDriverWait(BaseSteps.getDriver(), 10, 1000);
         wait.until(ExpectedConditions.visibilityOf(firstElement)).getText();
         headerSearch.sendKeys(firstElement.getText());

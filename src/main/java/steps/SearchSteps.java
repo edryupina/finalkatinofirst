@@ -1,4 +1,5 @@
 package steps;
+import org.openqa.selenium.By;
 import pages.SearchPage;
 import ru.yandex.qatools.allure.annotations.Step;
 import static org.junit.Assert.assertEquals;
@@ -17,13 +18,20 @@ public class SearchSteps {
 
     @Step("Выполнена проверка количества элементов на странице")
     public void stepShowTwelve(String expectedShowElements) {
-        String actualShowElements = new SearchPage().showTwelve.getText();
-        assertEquals(String.format("Количество элементов на странице: [%s]. Ожидалось - [%s]", actualShowElements, expectedShowElements), expectedShowElements, actualShowElements);
+        Integer count = BaseSteps.getDriver().findElements(By.xpath("//div[@class='n-snippet-card2__title']")).size();
+        //заменила и убрала лишнее
+        //   String actualShowElements = new SearchPage().showTwelve.getText();
+        //  assertEquals(String.format("Количество элементов на странице: [%s]. Ожидалось - [%s]", actualShowElements, expectedShowElements, expectedShowElements, actualShowElemens);
     }
 
-    @Step("Выполнен поиск первого элемента")
+    @Step("Найден первый элемент")
     public void stepFirstElementSeach() {
-        new SearchPage().searchFirstElement();
+        new SearchPage().firstElement.isEnabled();
+    }
+
+    @Step("Выполнен поиск по первому элементу")
+    public void stepSearchPasteSearchFirstElement() {
+        new SearchPage().searchPasteSearchFirstElement();
     }
 
     @Step("Выполнена проверка на соответсвие наименования товара искомому")

@@ -1,6 +1,8 @@
 package pages;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,6 +21,8 @@ public class MarketPage {
     public MarketPage() {
         PageFactory.initElements(BaseSteps.getDriver(), this);
     }
+
+
     public void selectElectronic() {
         Wait<WebDriver> wait = new WebDriverWait(BaseSteps.getDriver(), 10, 1000);
         wait.until(ExpectedConditions.visibilityOf(electronics)).click();
